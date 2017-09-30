@@ -161,16 +161,24 @@ window.onload = function () {
 
 function upDate() {
     var nextShowTimeSeconds = getCurrentShowTimeSeconds();
+    //var curShowTimeSeconds = getCurrentShowTimeSeconds();
 
     var nexthours = parseInt(nextShowTimeSeconds / 3600);
-    var nextminutes = parseInt((nextShowTimeSeconds - nexthours *3600)/60);//总时间减去小时的秒数，除以60秒，强制类型转换
-    var nextseconds = nextShowTimeSeconds % 60;//总时间除以60为分钟数，其的余数为秒数
+    var nextminutes = parseInt((nextShowTimeSeconds - nexthours *3600)/60);
+    var nextseconds = nextShowTimeSeconds % 60;
 
+    var curhours = parseInt(curShowTimeSeconds / 3600);
+    var curminutes = parseInt((curShowTimeSeconds - curhours *3600)/60);
+    var curseconds = curShowTimeSeconds % 60;
 
+    if (nextseconds != curseconds){
+        curShowTimeSeconds = nextShowTimeSeconds;
+    }
 }
 
 function render(cxt) {
 
+    cxt.clearRect(0,0,windowWidth,windowHieght);
     var hours = parseInt(curShowTimeSeconds / 3600);//总秒数除以3600秒，强制类型转换
     var minutes = parseInt((curShowTimeSeconds - hours *3600)/60);//总时间减去小时的秒数，除以60秒，强制类型转换
     var seconds = curShowTimeSeconds % 60;//总时间除以60为分钟数，其的余数为秒数
